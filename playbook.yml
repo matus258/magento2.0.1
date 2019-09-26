@@ -1,0 +1,36 @@
+---
+- hosts: localhost
+  roles:
+    - role: mage2
+      nginx_vhosts:
+        - listen: "80"
+          server_name: "3.85.13.125"
+          mage_root: "/var/www/html/magento"
+      nginx_upstreams:
+        - name: fastcgi_backend
+          servers: {
+            "127.0.0.1:9000"
+          }    
+      magento_root_dir: "/var/www/html/magento"
+      magento_account_public_key: "8d8534a6e30b5e4ae1b2ac7f79cd39d8"
+      magento_account_private_key: "d4e35835cc6a859ad028c43391636d11"     
+      mariadb_bind_address: '127.0.0.1'
+      mariadb_root_password: 'supersupersecret'
+      mariadb_databases:
+        - name: mage2db
+      mariadb_users:
+        - name: mage2usr
+          password: 'supersecret@'
+          priv: "mage2db.*:ALL"
+      magento_mysql_user: "mage2usr"
+      magento_mysql_password: "supersecret@"
+      magento_mysql_dbname: "mage2db"
+      magento_admin_user: "admin"
+      magento_admin_password: "adminadmin!1"
+      magento_admin_email: "admin@admin.com"
+      magento_admin_firstname: "Admin"
+      magento_admin_lastname: "Adminer"
+      magento_language: "en_US"
+      magento_currency: "USD"
+      magento_base_url: "http://3.85.13.125"
+
