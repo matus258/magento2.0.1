@@ -19,7 +19,24 @@
     group: "{{ __nginx_user }}"
     recurse: yes
 
-- name: Set file/directory permissions
-  shell: find var vendor pub/static pub/media app/etc -type f -exec chmod u+w {} \; && find var vendor pub/static pub/media app/etc -type d -exec chmod u+w {} \; && chmod u+x bin/magento
-  args:
-    chdir: "{{ magento_root_dir }}"
+- name: Recursively change ownership of a directory
+  file:
+    path: "{{ magento_root_dir }}"
+    state: directory
+    recurse: yes
+    owner: "{{ __nginx_user }}"
+    group: "{{ __nginx_user }}"
+    mode: u+rw-x+X,g+rw-x+X,o-rwx
+
+- name: set $MAGE_MODE developer
+  lineinfile:
+    path: "{{ magento_root_dir }}"/nginx.conf.sample
+    regexp: 'set $MAGE_MODE default'
+    line: set $MAGE_MODE developer
+
+- name: set $MAGE_MODE developer
+  lineinfile:
+    path: /var/www/html/magento/nginx.conf.sample
+    regexp: 'default;'
+    line: set $MAGE_MODE developer;
+~                                     
