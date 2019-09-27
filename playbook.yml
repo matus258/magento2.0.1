@@ -4,7 +4,7 @@
     - role: mage2
       nginx_vhosts:
         - listen: "80"
-          server_name: "3.85.13.125"
+          server_name: "18.215.235.115"
           mage_root: "/var/www/html/magento"
       nginx_upstreams:
         - name: fastcgi_backend
@@ -32,5 +32,5 @@
       magento_admin_lastname: "Adminer"
       magento_language: "en_US"
       magento_currency: "USD"
-      magento_base_url: "http://3.85.13.125"
+      magento_base_url: "http://18.215.235.115"
 

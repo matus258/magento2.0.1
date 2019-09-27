@@ -30,7 +30,7 @@
 
 - name: set $MAGE_MODE developer
   lineinfile:
-    path: "{{ magento_root_dir }}"/nginx.conf.sample
+    path: "{{ magento_root_dir }}/nginx.conf.sample"
     regexp: 'set $MAGE_MODE default'
     line: set $MAGE_MODE developer
 
