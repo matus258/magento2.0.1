@@ -7,15 +7,22 @@
 - name: install composer
   shell: cat /tmp/installer | php70 -- --install-dir=/usr/local/bin
   args:
-    creates: /usr/bin/composer
+    creates: /usr/local/bin/composer
 
 - name: rename composer.phar to composer
-  shell: mv /usr/bin/composer.phar /usr/bin/composer
+  shell: mv /usr/local/bin/composer.phar /usr/local/bin/composer
   args:
-    creates: /usr/bin/composer
+    creates: /usr/local/bin/composer
 
 - name: make composer executable
   file: 
-    path: /usr/bin/composer
+    path: /usr/local/bin/composer
     mode: a+x
     state: file
+- name: Create composer symbolic link
+  file:
+    src: /usr/local/bin/composer
+    dest: /usr/bin/composer
+    owner: root
+    group: root
+    state: link
