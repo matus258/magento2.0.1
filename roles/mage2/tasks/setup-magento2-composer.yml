@@ -39,4 +39,3 @@
     path: /var/www/html/magento/nginx.conf.sample
     regexp: 'default;'
     line: set $MAGE_MODE developer;
-~                                     
